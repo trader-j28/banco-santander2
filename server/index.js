@@ -12,17 +12,17 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Parse JSON bodies
 app.use(express.json());
 
+// app health check 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'santander-mexico' });
+});
+
 // Use routes
 app.use('/', routes);
 
 // Fallback for SPA routing
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
-});
-
-// new app health-check
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok', service: 'santander-mexico' });
 });
 
 app.listen(port, () => {
