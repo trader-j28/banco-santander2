@@ -20,6 +20,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+// new app health-check
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'santander-mexico' });
+});
+
 app.listen(port, () => {
   console.log(`Santander México server running on port ${port}`);
 });
